@@ -1,0 +1,32 @@
+{
+    "project_info": {
+        "project_number": "1036451519993",
+        "firebase_url": "https://coincap-d0408.firebaseio.com",
+        "project_id": "coincap-d0408",
+        "storage_bucket": "coincap-d0408.appspot.com"
+    },
+    "client": [{
+        "client_info": {
+            "mobilesdk_app_id": "1:1036451519993:android:ce885aed64608d3370f128",
+            "android_client_info": {
+                "package_name": "com.example.coincap_flutter"
+            }
+        },
+        "oauth_client": [{
+            "client_id": "1036451519993-ud6r2i9i80fph9793t9ifs5clgfna5al.apps.googleusercontent.com",
+            "client_type": 3
+        }],
+        "api_key": [{
+            "current_key": "AIzaSyCIA2rgt1qXUNfMns_TAXhDiAF5Gpg4qU8"
+        }],
+        "services": {
+            "appinvite_service": {
+                "other_platform_oauth_client": [{
+                    "client_id": "1036451519993-ud6r2i9i80fph9793t9ifs5clgfna5al.apps.googleusercontent.com",
+                    "client_type": 3
+                }]
+            }
+        }
+    }],
+    "configuration_version": "1"
+}
