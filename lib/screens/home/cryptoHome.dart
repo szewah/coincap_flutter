@@ -9,9 +9,6 @@ class CryptoHome extends StatefulWidget {
 
 class _CryptoHomeState extends State<CryptoHome> {
 
-  // Future<List<Currency>> futureCurrency;
-  
-
   @override
   void initState() {
     super.initState();
@@ -33,11 +30,9 @@ class _CryptoHomeState extends State<CryptoHome> {
         future: fetchCurrencies(),
         // ignore: missing_return
         builder: (context, snapshot) {
-          // if (snapshot.data == null) return CircularProgressIndicator();
           if (snapshot.hasData) {
             List<Currency> data = snapshot.data;
             return _jobsListView(data);
-            // return Text('Hello');
           }
         }
       )
@@ -52,12 +47,10 @@ class _CryptoHomeState extends State<CryptoHome> {
         itemCount: 1,
         itemBuilder: (context, index) {
           return _tile(data[index].name);
-          // return _tile(data[index].name, data[index].price);
         });
   }
 
   ListTile _tile(String title) => ListTile(
-  // ListTile _tile(String title, String subtitle, IconData icon) => ListTile(
     onTap: (){print('I was tapped');},
     title: Text(title,
         style: TextStyle(

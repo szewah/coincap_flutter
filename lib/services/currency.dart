@@ -14,13 +14,7 @@ Future<List<Currency>> fetchCurrencies() async {
     List<Currency> coins = ((json.decode(response.body) as List).map((i) => Currency.fromJson(i))).toList();
     // return jsonResponse.map((coin) =>  (new Currency.fromJson(coin))).toList();
     return coins;
-    
 
-    // Response response = await get('https://mock-json-service.glitch.me/');
-    // List jsonResponse = json.decode(response.body);
-    // var listLength = jsonResponse.length;
-    // print('This is the length of the response $listLength');
-    // return jsonResponse.map((coin) =>  (new Currency.fromJson(coin))).toList();
     
   } catch(e) {
       print('This is the error $e');
