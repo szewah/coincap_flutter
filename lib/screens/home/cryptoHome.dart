@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:coincap_flutter/services/currency.dart';
 import 'package:flutter/material.dart';
 
@@ -33,6 +35,8 @@ class _CryptoHomeState extends State<CryptoHome> {
           if (snapshot.hasData) {
             List<Currency> data = snapshot.data;
             return _jobsListView(data);
+          } else if (snapshot.hasError) {
+            return Text('${snapshot.error}');
           }
         }
       )
@@ -44,19 +48,23 @@ class _CryptoHomeState extends State<CryptoHome> {
 
   ListView _jobsListView(data) {
     return ListView.builder(
-        itemCount: 1,
+        itemCount: data.length,
         itemBuilder: (context, index) {
-          return _tile(data[index].name);
+          return _card(data[index].id, data[index].name, data[index].slug, data[index].price);
         });
   }
 
-  ListTile _tile(String title) => ListTile(
-    onTap: (){print('I was tapped');},
-    title: Text(title,
+
+  Card _card(int id, String title, String slug, double price) => Card(
+
+    child: ListTile(
+      leading: Image.asset('assets/$slug.png', height: 23, width: 23),
+      onTap: (){print('$price');},
+      title: Text(title,
         style: TextStyle(
-          fontWeight: FontWeight.w500,
           fontSize: 20,
         )),
-    // subtitle: Text(subtitle),
+        subtitle: Text('$price'),
+    )
   );
 }

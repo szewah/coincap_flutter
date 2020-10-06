@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'dart:ffi';
 import 'package:http/http.dart';
+import 'dart:math';
 
 
 Future<List<Currency>> fetchCurrencies() async {
@@ -7,11 +9,11 @@ Future<List<Currency>> fetchCurrencies() async {
   try{
     
     Response response = await get('http://10.0.2.2:3000/coin');
-    print('this is working');
     
     var jsonResponse = json.decode(response.body);
     print(jsonResponse);
-    List<Currency> coins = ((json.decode(response.body) as List).map((i) => Currency.fromJson(i))).toList();
+    List<Currency> coins = ((jsonResponse as List).map((i) => Currency.fromJson(i))).toList();
+
     // return jsonResponse.map((coin) =>  (new Currency.fromJson(coin))).toList();
     return coins;
 
@@ -24,24 +26,32 @@ Future<List<Currency>> fetchCurrencies() async {
 
 class Currency {
 
-  // final String id;
+
+  final int id;
   final String name;
-  // final String position;
-  // final String company;
-  // final String description;
+  final String slug;
+  final double price;
 
-  Currency({this.name});
 
+  Currency({this.id,this.name, this.slug, this.price});
+
+  
 
   factory Currency.fromJson(Map<String, dynamic> json) {
+
+    precision(data) {
+    int decimals = 2;
+    int fac = pow(10, decimals);
+    double d = data;
+    d = (d * fac).round()/fac;
+    return d;
+    }
+
     return Currency(
-      // id: json['id'],
-      // position: json['position'],
-      // company: json['company'],
-      // description: json['description'],
-      // id: json['id],
+      id: json['id'],
       name: json['name'],
-      // price: json['quote']['USD']['price'],
+      slug: json['slug'],
+      price: precision(json['quote']['USD']['price']),
       // change: json['quote']['USD']["percent_change_1h"],
       // seven-day-change: json['quote]['USD']['percent_change_7d],
       // max-supply: json['max_supply'],
