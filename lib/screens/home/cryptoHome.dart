@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:coincap_flutter/services/currency.dart';
 import 'package:flutter/material.dart';
 
@@ -10,6 +8,8 @@ class CryptoHome extends StatefulWidget {
 }
 
 class _CryptoHomeState extends State<CryptoHome> {
+
+  Map data = {};
 
   @override
   void initState() {
@@ -40,9 +40,6 @@ class _CryptoHomeState extends State<CryptoHome> {
           }
         }
       )
-      // Center(
-      //   child: Text('Hello this is a placeholder'),
-      // )
     );
   }
 
@@ -56,10 +53,12 @@ class _CryptoHomeState extends State<CryptoHome> {
 
 
   Card _card(int id, String title, String slug, double price) => Card(
-
     child: ListTile(
       leading: Image.asset('assets/$slug.png', height: 23, width: 23),
-      onTap: (){print('$price');},
+      onTap: () {
+        print('$price');
+        Navigator.pushNamed(context, '/detail');
+      },
       title: Text(title,
         style: TextStyle(
           fontSize: 20,
