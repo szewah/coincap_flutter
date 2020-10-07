@@ -24,7 +24,7 @@ class CryptoDetail extends StatelessWidget {
                 icon: Icon(
                   Icons.arrow_back_sharp
                 ), 
-                label: Text('Back'),
+                label: Text(coin.name),
               )
             ],)
         ),

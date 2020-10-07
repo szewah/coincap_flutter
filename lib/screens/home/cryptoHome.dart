@@ -14,6 +14,7 @@ class _CryptoHomeState extends State<CryptoHome> {
   @override
   void initState() {
     super.initState();
+    //hits the CMC api as soon as it loads
     fetchCurrencies();
   }
 
@@ -32,6 +33,7 @@ class _CryptoHomeState extends State<CryptoHome> {
       body: 
       Center(
         child: FutureBuilder<List<Currency>>(
+          //the future to use is fetchCurrencies() services/currency.dart
           future: fetchCurrencies(),
           // ignore: missing_return
           builder: (context, snapshot) {
@@ -55,11 +57,7 @@ class _CryptoHomeState extends State<CryptoHome> {
             data[index].id, 
             data[index].name, 
             data[index].slug, 
-            data[index].maxSupply, 
             data[index].price, 
-            data[index].change,
-            data[index].sevenDayChange,
-            data[index].inCirculation,
             data,
             index
           );
@@ -67,7 +65,7 @@ class _CryptoHomeState extends State<CryptoHome> {
   }
 
 
-  Card _card(int id, String name, String slug, int maxSupply, double price, double change, double sevenDayChange, double inCirculation, data, index) => Card(
+  Card _card(int id, String name, String slug, double price, data, index) => Card(
     child: ListTile(
       leading: Image.asset('assets/$slug.png', height: 23, width: 23),
       onTap: () {
@@ -81,7 +79,7 @@ class _CryptoHomeState extends State<CryptoHome> {
         style: TextStyle(
           fontSize: 20,
         )),
-        subtitle: Text('$inCirculation'),
+        subtitle: Text('$price'),
     )
   );
 }
