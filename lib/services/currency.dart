@@ -10,7 +10,7 @@ Future<List<Currency>> fetchCurrencies() async {
     Response response = await get('http://10.0.2.2:3000/coin');
     
     var jsonResponse = json.decode(response.body);
-    print(jsonResponse);
+
     List<Currency> coins = ((jsonResponse as List).map((i) => Currency.fromJson(i))).toList();
 
     // return jsonResponse.map((coin) =>  (new Currency.fromJson(coin))).toList();
@@ -26,24 +26,33 @@ Future<List<Currency>> fetchCurrencies() async {
 class Currency {
 
 
-  final int id;
-  final String name;
-  final String slug;
-  final double price;
+  final int id, rank, maxSupply;
+  final String name, slug;
+  final double price, change, sevenDayChange, inCirculation;
 
-
-  Currency({this.id,this.name, this.slug, this.price});
+  //passing parameters
+  Currency({
+    this.id,
+    this.name, 
+    this.slug, 
+    this.price, 
+    this.change, 
+    this.sevenDayChange,
+    this.maxSupply,
+    this.inCirculation,
+    this.rank,
+  });
 
   
 
   factory Currency.fromJson(Map<String, dynamic> json) {
 
     precision(data) {
-    int decimals = 2;
-    int fac = pow(10, decimals);
-    double d = data;
-    d = (d * fac).round()/fac;
-    return d;
+      int decimals = 2;
+      int fac = pow(10, decimals);
+      double d = data;
+      d = (d * fac).round() / fac;
+      return d;
     }
 
     return Currency(
@@ -51,11 +60,11 @@ class Currency {
       name: json['name'],
       slug: json['slug'],
       price: precision(json['quote']['USD']['price']),
-      // change: json['quote']['USD']["percent_change_1h"],
-      // seven-day-change: json['quote]['USD']['percent_change_7d],
-      // max-supply: json['max_supply'],
-      // in-circulation: json['circulating_supply],
-      // rank: json['cmc_rank'],     
+      change: precision(json['quote']['USD']['percent_change_1h']),
+      sevenDayChange: precision(json['quote']['USD']['percent_change_7d']),
+      maxSupply: json['max_supply'],
+      inCirculation: json['circulating_supply'] is int? (json['circulating_supply'] as int).toDouble() : (json['circulation_supply']),
+      rank: json['cmc_rank'],     
     );
   }
 }

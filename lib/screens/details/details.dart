@@ -1,11 +1,12 @@
+import 'package:coincap_flutter/services/currency.dart';
 import 'package:flutter/material.dart';
 
-class CryptoDetail extends StatefulWidget {
-  @override
-  _CryptoDetailState createState() => _CryptoDetailState();
-}
 
-class _CryptoDetailState extends State<CryptoDetail> {
+class CryptoDetail extends StatelessWidget {
+
+  final Currency coin;
+
+  CryptoDetail({Key key, @required this.coin}): super(key:key);
 
 
   @override
@@ -23,10 +24,10 @@ class _CryptoDetailState extends State<CryptoDetail> {
                 icon: Icon(
                   Icons.arrow_back_sharp
                 ), 
-                label: Text('Previous'),
+                label: Text('Back'),
               )
             ],)
-        )
+        ),
       )
     );
   }

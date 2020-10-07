@@ -1,4 +1,5 @@
 import 'package:coincap_flutter/services/currency.dart';
+import 'package:coincap_flutter/screens/details/details.dart';
 import 'package:flutter/material.dart';
 
 
@@ -9,7 +10,6 @@ class CryptoHome extends StatefulWidget {
 
 class _CryptoHomeState extends State<CryptoHome> {
 
-  Map data = {};
 
   @override
   void initState() {
@@ -19,6 +19,8 @@ class _CryptoHomeState extends State<CryptoHome> {
 
   @override
   Widget build(BuildContext context) {
+    
+
     return Scaffold(
       backgroundColor: Colors.blueGrey[100],
       appBar: AppBar(
@@ -28,17 +30,19 @@ class _CryptoHomeState extends State<CryptoHome> {
         elevation: 0,
       ),
       body: 
-      FutureBuilder<List<Currency>>(
-        future: fetchCurrencies(),
-        // ignore: missing_return
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            List<Currency> data = snapshot.data;
-            return _jobsListView(data);
-          } else if (snapshot.hasError) {
-            return Text('${snapshot.error}');
+      Center(
+        child: FutureBuilder<List<Currency>>(
+          future: fetchCurrencies(),
+          // ignore: missing_return
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              List<Currency> data = snapshot.data;
+              return _jobsListView(data);
+            } else if (snapshot.hasError) {
+              return Text('This is the error message ${snapshot.error}');
+            }
           }
-        }
+        ),
       )
     );
   }
@@ -47,23 +51,38 @@ class _CryptoHomeState extends State<CryptoHome> {
     return ListView.builder(
         itemCount: data.length,
         itemBuilder: (context, index) {
-          return _card(data[index].id, data[index].name, data[index].slug, data[index].price);
+          return _card(
+            data[index].id, 
+            data[index].name, 
+            data[index].slug, 
+            data[index].maxSupply, 
+            data[index].price, 
+            data[index].change,
+            data[index].sevenDayChange,
+            data[index].inCirculation,
+            data,
+            index
+          );
         });
   }
 
 
-  Card _card(int id, String title, String slug, double price) => Card(
+  Card _card(int id, String name, String slug, int maxSupply, double price, double change, double sevenDayChange, double inCirculation, data, index) => Card(
     child: ListTile(
       leading: Image.asset('assets/$slug.png', height: 23, width: 23),
       onTap: () {
-        print('$price');
-        Navigator.pushNamed(context, '/detail');
+        print('Testing $index');
+        Navigator.push(
+          context, 
+          MaterialPageRoute(builder: (context) => CryptoDetail(coin: data[index]))
+          );
       },
-      title: Text(title,
+      title: Text(name,
         style: TextStyle(
           fontSize: 20,
         )),
-        subtitle: Text('$price'),
+        subtitle: Text('$inCirculation'),
     )
   );
 }
+
