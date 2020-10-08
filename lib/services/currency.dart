@@ -27,7 +27,7 @@ class Currency {
 
 
   final int id, rank, maxSupply;
-  final String name, slug;
+  final String name, slug, symbol;
   final double price, change, sevenDayChange, inCirculation;
 
   //passing parameters
@@ -41,6 +41,7 @@ class Currency {
     this.maxSupply,
     this.inCirculation,
     this.rank,
+    this.symbol,
   });
 
   
@@ -55,16 +56,18 @@ class Currency {
       return d;
     }
 
+
     return Currency(
       id: json['id'],
       name: json['name'],
+      symbol: json['symbol'],
       slug: json['slug'],
       price: precision(json['quote']['USD']['price']),
-      change: precision(json['quote']['USD']['percent_change_1h']),
+      change: precision(json['quote']['USD']['percent_change_24h']),
       sevenDayChange: precision(json['quote']['USD']['percent_change_7d']),
       maxSupply: json['max_supply'],
       inCirculation: json['circulating_supply'] is int? (json['circulating_supply'] as int).toDouble() : (json['circulation_supply']),
-      rank: json['cmc_rank'],     
+      rank: json['cmc_rank'],
     );
   }
 }

@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => CryptoHome(),
-        '/detail': (context) => CryptoDetail(),
+        '/detail': (context) => CryptoDetail(coin: null,),
       }
     );
   }

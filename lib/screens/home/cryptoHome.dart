@@ -1,6 +1,7 @@
 import 'package:coincap_flutter/services/currency.dart';
 import 'package:coincap_flutter/screens/details/details.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 
 class CryptoHome extends StatefulWidget {
@@ -16,16 +17,17 @@ class _CryptoHomeState extends State<CryptoHome> {
     super.initState();
     //hits the CMC api as soon as it loads
     fetchCurrencies();
+    print('init state function ran');
   }
 
   @override
   Widget build(BuildContext context) {
     
-
+    print('build function ran');
     return Scaffold(
       backgroundColor: Colors.blueGrey[100],
       appBar: AppBar(
-        backgroundColor: Colors.blueGrey[400],
+        backgroundColor: Colors.blueGrey,
         title: Text('Choose a coin'),
         centerTitle: true,
         elevation: 0,
@@ -40,9 +42,11 @@ class _CryptoHomeState extends State<CryptoHome> {
             if (snapshot.hasData) {
               List<Currency> data = snapshot.data;
               return _jobsListView(data);
-            } else if (snapshot.hasError) {
-              return Text('This is the error message ${snapshot.error}');
+            } 
+            if (snapshot.hasError) {
+              return Text(snapshot.error.toString());
             }
+            return spinkit;
           }
         ),
       )
@@ -56,6 +60,7 @@ class _CryptoHomeState extends State<CryptoHome> {
           return _card(
             data[index].id, 
             data[index].name, 
+            data[index].symbol,
             data[index].slug, 
             data[index].price, 
             data,
@@ -65,11 +70,11 @@ class _CryptoHomeState extends State<CryptoHome> {
   }
 
 
-  Card _card(int id, String name, String slug, double price, data, index) => Card(
+  Card _card(int id, String name, String symbol, String slug, double price, data, index) => Card(
     child: ListTile(
       leading: Image.asset('assets/$slug.png', height: 23, width: 23),
       onTap: () {
-        print('Testing $index');
+        print('Testing $index and $name');
         Navigator.push(
           context, 
           MaterialPageRoute(builder: (context) => CryptoDetail(coin: data[index]))
@@ -79,8 +84,12 @@ class _CryptoHomeState extends State<CryptoHome> {
         style: TextStyle(
           fontSize: 20,
         )),
-        subtitle: Text('$price'),
+        subtitle: Text('\$$price'),
     )
   );
+
+  static const spinkit = SpinKitRipple(color: Colors.redAccent, size: 50);
+  
+
 }
 
