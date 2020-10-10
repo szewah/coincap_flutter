@@ -61,8 +61,10 @@ class _CryptoHomeState extends State<CryptoHome> {
             data[index].id, 
             data[index].name, 
             data[index].symbol,
-            data[index].slug, 
+            data[index].image, 
             data[index].price, 
+            data[index].change_24hrPercent,
+            data[index].change_24hr,
             data,
             index
           );
@@ -70,11 +72,10 @@ class _CryptoHomeState extends State<CryptoHome> {
   }
 
 
-  Card _card(int id, String name, String symbol, String slug, double price, data, index) => Card(
+  Card _card(String id, String name, String symbol, String image, double price, double change_24hrPercent, double change_24hr, data, index) => Card(
     child: ListTile(
-      leading: Image.asset('assets/$slug.png', height: 23, width: 23),
+      leading: new Image.network('$image', height: 26, width: 26,),
       onTap: () {
-        print('Testing $index and $name');
         Navigator.push(
           context, 
           MaterialPageRoute(builder: (context) => CryptoDetail(coin: data[index]))

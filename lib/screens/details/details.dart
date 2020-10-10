@@ -10,7 +10,7 @@ class CryptoDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(coin.symbol);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.redAccent,
@@ -28,10 +28,10 @@ class CryptoDetail extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    coin.symbol,
+                    '${coin.name}',
                     style: TextStyle(
                         fontSize: 50,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w500,
                         )
                   )
                 ],
@@ -52,17 +52,24 @@ class CryptoDetail extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Today',
+                    '24hr',
                     style: TextStyle(
                       fontSize: 20,
                     )),
                   Icon(
-                    coin.change > 0 ? Icons.arrow_drop_up: Icons.arrow_drop_down,
-                    color: coin.change > 0 ? Colors.green : Colors.red,
+                    coin.change_24hr > 0 ? Icons.arrow_drop_up: Icons.arrow_drop_down,
+                    color: coin.change_24hr > 0 ? Colors.green : Colors.red,
                     size: 24,
                   ),
                   Text(
-                    '${coin.change}%',
+                    '\$${coin.change_24hr}',
+                    style: TextStyle(
+                      fontSize:20,
+                      letterSpacing: 1,
+                      )
+                    ),
+                  Text(
+                    '(${coin.change_24hrPercent})%',
                     style: TextStyle(
                       fontSize:20,
                       letterSpacing: 1,
@@ -71,28 +78,12 @@ class CryptoDetail extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 10),
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.center,
-              //   children: [
-              //     Text(
-              //       'Max supply',
-              //       style: TextStyle(fontSize: 20),
-              //     )
-              //   ],
-              // ),
-              // SizedBox(height: 20,),
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.center,
-              //   children: [
-              //     Text(
-              //       percentageChange(coin.price, coin.change).toString(),
-              //       style: TextStyle(
-              //         fontSize:20,
-              //         letterSpacing: 1,
-              //         )
-              //       ),
-              //   ],
-              // )
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  
+                ],
+              )
             ],
             )
         ),
