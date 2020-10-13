@@ -16,7 +16,7 @@ class CryptoDetail extends StatelessWidget {
       return Scaffold(
         extendBody: true,
         appBar: AppBar(
-          title: Text('Title'),
+          title: Text('Back'),
           ),
         body: Padding(
           padding: EdgeInsets.fromLTRB(1, 50, 0, 1),
@@ -43,7 +43,40 @@ class CryptoDetail extends StatelessWidget {
                   )
                 )
               ),
-              SizedBox(height:50),
+              SizedBox(height:10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    '24hr',
+                    style: TextStyle(
+                      fontSize: 20,
+                    )
+                  ),
+                  Icon(
+                    coin.change_24hr > 0 ? Icons.arrow_drop_up: Icons.arrow_drop_down,
+                    color: coin.change_24hr > 0 ? Colors.green : Colors.red,
+                    size: 24,
+                  ),
+                  Text(
+                    '\$${coin.change_24hr}',
+                    style: TextStyle(
+                      fontSize:20,
+                      letterSpacing: 1,
+                      color: coin.change_24hr > 0 ? Colors.green : Colors.red,
+                      )
+                    ),
+                  Text(
+                    ' (${coin.change_24hrPercent}%)',
+                    style: TextStyle(
+                      fontSize:20,
+                      letterSpacing: 1,
+                      color: coin.change_24hr > 0 ? Colors.green : Colors.red,
+                    )
+                  ),
+                ],
+              ),
+              SizedBox(height:30),
               Container(
                 height: 50, 
                 child: DefaultTabController(
@@ -74,87 +107,5 @@ class CryptoDetail extends StatelessWidget {
             )
           )
         ); 
-       
-      
-      
-      
-    // return Scaffold(
-    //   appBar: AppBar(
-    //     backgroundColor: Colors.redAccent,
-    //     title: Text(coin.name, style: TextStyle(fontSize: 20),),
-    //     elevation: 0,
-    //   ),
-    //   body: SafeArea(
-    //     child: Padding(
-    //       padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-    //       child: 
-    //       Column(
-    //         children: [
-    //           SizedBox(height: 100,),
-    //           Row(
-    //             mainAxisAlignment: MainAxisAlignment.center,
-    //             children: [
-    //               Text(
-    //                 '${coin.name}',
-    //                 style: TextStyle(
-    //                     fontSize: 50,
-    //                     fontWeight: FontWeight.w500,
-    //                     )
-    //               )
-    //             ],
-    //           ),
-    //           Row(
-    //             mainAxisAlignment: MainAxisAlignment.center,
-    //             children: [
-    //               Text(
-    //                 '\$${coin.price}',
-    //                 style: TextStyle(
-    //                   fontSize: 50,
-    //                   )
-    //                 )
-    //             ],)
-    //           ,
-    //           SizedBox(height: 20,),
-    //           Row(
-    //             mainAxisAlignment: MainAxisAlignment.center,
-    //             children: [
-    //               Text(
-    //                 '24hr',
-    //                 style: TextStyle(
-    //                   fontSize: 20,
-    //                 )),
-    //               Icon(
-    //                 coin.change_24hr > 0 ? Icons.arrow_drop_up: Icons.arrow_drop_down,
-    //                 color: coin.change_24hr > 0 ? Colors.green : Colors.red,
-    //                 size: 24,
-    //               ),
-    //               Text(
-    //                 '\$${coin.change_24hr}',
-    //                 style: TextStyle(
-    //                   fontSize:20,
-    //                   letterSpacing: 1,
-    //                   )
-    //                 ),
-    //               Text(
-    //                 '(${coin.change_24hrPercent})%',
-    //                 style: TextStyle(
-    //                   fontSize:20,
-    //                   letterSpacing: 1,
-    //                   )
-    //                 ),
-    //             ],
-    //           ),
-    //           SizedBox(height: 10),
-    //           Row(
-    //             mainAxisAlignment: MainAxisAlignment.center,
-    //             children: [
-                 
-    //             ],
-    //           )
-    //         ],
-    //         )
-    //     ),
-    //   )
-    // );
   }
 }
