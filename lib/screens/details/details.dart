@@ -18,62 +18,61 @@ class CryptoDetail extends StatelessWidget {
         appBar: AppBar(
           title: Text('Title'),
           ),
-        body: Column(
-          children: [
-            Container(
-              height: 50,
-              width: 300,
-              child: 
-              Text(
-                '${coin.name}',
+        body: Padding(
+          padding: EdgeInsets.fromLTRB(1, 50, 0, 1),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                height: 50,
+                child: 
+                Text(
+                  '${coin.name}',
+                  style: TextStyle(
+                      fontSize: 40,
+                      fontWeight: FontWeight.w500,
+                      )
+                )
+              ),
+              Container(
+                height: 50,
+                child: Text(
+                '\$${coin.price}',
                 style: TextStyle(
-                    fontSize: 50,
-                    fontWeight: FontWeight.w500,
-                    )
-              )
-            ),
-            Container(
-              height: 50,
-              width: 300,
-              child: Text(
-              '\$${coin.price}',
-              style: TextStyle(
-                fontSize: 50,
+                  fontSize: 40,
+                  )
                 )
-              )
-            ),
-            SizedBox(height:50),
-            Container(
-              height: 50, 
-              width: 300,
-              child: DefaultTabController(
-                length: 3, 
-                child: Scaffold(
-                  appBar: PreferredSize(
-                    preferredSize:Size.fromHeight(35),                    
-                    child: TabBar(
-                      labelColor: Colors.black12,
-                      indicatorColor: Colors.amber,
-                      tabs: [
-                        Tab(text: '1D'),
-                        Tab(text: '5D'),
-                        Tab(text: '30D'),
-                      ],
+              ),
+              SizedBox(height:50),
+              Container(
+                height: 50, 
+                child: DefaultTabController(
+                  length: 3, 
+                  child: Scaffold(
+                    appBar: PreferredSize(
+                      preferredSize:Size.fromHeight(35),                    
+                      child: TabBar(
+                        labelColor: Colors.black12,
+                        indicatorColor: Colors.amber,
+                        tabs: [
+                          Tab(text: '1D'),
+                          Tab(text: '5D'),
+                          Tab(text: '30D'),
+                        ],
+                      ),
                     ),
-                  ),
-                  body: TabBarView(
-                    children: [
-                      OneDay(),
-                      FiveDay(),
-                      ThirtyDay()
-                    ])
+                    body: TabBarView(
+                      children: [
+                        OneDay(),
+                        FiveDay(),
+                        ThirtyDay()
+                      ])
+                    )
+                  )
                 )
-              )
+              ],
             )
-          ],
           )
-        
-        
         ); 
        
       
