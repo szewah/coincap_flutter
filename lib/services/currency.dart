@@ -15,7 +15,7 @@ Future<List<Currency>> fetchCurrencies() async {
 
     print('The response worked');
     List<Currency> coins = ((jsonResponse as List).map((i) => Currency.fromJson(i))).toList();
-    // return jsonResponse.map((coin) =>  (new Currency.fromJson(coin))).toList();
+  
     return coins;
     // return null;
 
@@ -27,8 +27,6 @@ Future<List<Currency>> fetchCurrencies() async {
 }
 
 class Currency {
-
-
   
   final String name, image, id, symbol;
   final int rank;

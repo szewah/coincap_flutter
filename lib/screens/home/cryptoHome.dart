@@ -3,7 +3,6 @@ import 'package:coincap_flutter/screens/details/details.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
-
 class CryptoHome extends StatefulWidget {
   @override
   _CryptoHomeState createState() => _CryptoHomeState();
@@ -41,7 +40,7 @@ class _CryptoHomeState extends State<CryptoHome> {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               List<Currency> data = snapshot.data;
-              return _jobsListView(data);
+              return _coinListView(data);
             } 
             if (snapshot.hasError) {
               return Text(snapshot.error.toString());
@@ -53,7 +52,7 @@ class _CryptoHomeState extends State<CryptoHome> {
     );
   }
 
-  ListView _jobsListView(data) {
+  ListView _coinListView(data) {
     return ListView.builder(
         itemCount: data.length,
         itemBuilder: (context, index) {
