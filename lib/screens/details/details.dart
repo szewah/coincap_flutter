@@ -12,7 +12,7 @@ class CryptoDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
+      print(coin.id);
       return Scaffold(
         extendBody: true,
         appBar: AppBar(
@@ -78,34 +78,37 @@ class CryptoDetail extends StatelessWidget {
               ),
               SizedBox(height:30),
               Container(
-                height: 50, 
+                height: 380, 
                 child: DefaultTabController(
                   length: 3, 
-                  child: Scaffold(
-                    appBar: PreferredSize(
-                      preferredSize:Size.fromHeight(35),                    
-                      child: TabBar(
+                  child: Column(                 
+                    children: [
+                      TabBar(
                         labelColor: Colors.black12,
-                        indicatorColor: Colors.amber,
+                        indicatorColor: Colors.green,
                         tabs: [
                           Tab(text: '1D'),
                           Tab(text: '5D'),
                           Tab(text: '30D'),
                         ],
-                      ),
                     ),
-                    body: TabBarView(
-                      children: [
-                        OneDay(),
-                        FiveDay(),
-                        ThirtyDay()
-                      ])
+                    Container(
+                      height: 332.0,
+                      child: TabBarView(
+                        children: [
+                          OneDay('${coin.id}', 1),
+                          FiveDay(),
+                          ThirtyDay()
+                        ],
+                      )
                     )
-                  )
+                  ]
                 )
-              ],
+              )
             )
-          )
-        ); 
+          ],
+        )
+      )
+    ); 
   }
 }
