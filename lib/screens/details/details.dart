@@ -97,8 +97,8 @@ class CryptoDetail extends StatelessWidget {
                       child: TabBarView(
                         children: [
                           OneDay('${coin.id}', 1),
-                          FiveDay(),
-                          ThirtyDay()
+                          FiveDay('${coin.id}', 5),
+                          ThirtyDay('${coin.id}', 30)
                         ],
                       )
                     )

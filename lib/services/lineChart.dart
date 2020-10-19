@@ -16,16 +16,18 @@ Future<List<CurrencyHistory>> fetchCurrencyHistory(coin, day) async {
 
     List coinResponse = jsonResponse['prices'];
     
-    List<dynamic> coinPriceList = [];
+    Map<String, dynamic> coinPriceMap = {};
+    List coinPriceList = [];
     
     for (var i = 1; i <coinResponse.length;i++) {
       double price = coinResponse[i][1];
-      coinPriceList.add(price);
+      num index = i;
+      coinPriceMap = {'index': index, 'price': price};
+      coinPriceList.add(coinPriceMap);
     }
 
     List<CurrencyHistory> list = coinPriceList.map((i) => CurrencyHistory.fromJson(i)).toList();
     return list;
-
     
   } catch(e) {
       print('This is the error which is causing the break $e');
@@ -36,16 +38,20 @@ Future<List<CurrencyHistory>> fetchCurrencyHistory(coin, day) async {
 
 class CurrencyHistory {
   
+  final num index;
   final double price;
 
   CurrencyHistory({
+    this.index,
     this.price, 
   });
 
-  factory CurrencyHistory.fromJson(dynamic json) {
+  // factory Currency.fromJson(Map<String, dynamic> json) 
+  factory CurrencyHistory.fromJson(Map<String, dynamic> json) {
     // print(json);
     return CurrencyHistory(
-      price: json as double
+      index: json['index'] as num,
+      price: json['price'] as double
     );
   }
 }

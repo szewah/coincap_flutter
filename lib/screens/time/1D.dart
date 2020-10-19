@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:coincap_flutter/services/lineChart.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:charts_flutter/flutter.dart' as charts;
 
 
 
@@ -26,18 +27,18 @@ class _OneDayState extends State<OneDay> {
   Widget build(BuildContext context) {
     print('this is working');
     return Scaffold(
-      backgroundColor: Colors.green,
       body: Container(
         height: 500,
         width: 500,
-        color: Colors.red,
+        color: Colors.white,
         child: Center(
           child: FutureBuilder<List<CurrencyHistory>>(
             future: fetchCurrencyHistory(widget.id, widget.day),
             builder: (context, snapshot) {
               if(snapshot.hasData) {
                 List<CurrencyHistory> data = snapshot.data;
-                return _oneDayListView(data);
+                // return Container();
+                return _getContainer(data);
               }
               if(snapshot.hasError) {
                 return Text(snapshot.error.toString());
@@ -52,27 +53,47 @@ class _OneDayState extends State<OneDay> {
 
     static const spinkit = SpinKitRipple(color: Colors.redAccent, size: 50);
 
-    ListView _oneDayListView(data) {
-      return ListView.builder(
-          itemCount: 3,
-          itemBuilder: (context, index) {
-            return _card(
-              data[index].price
-            );
-          });
+    Container _getContainer(data) {
+      return Container(
+        height: 500,
+        padding:EdgeInsets.all(10),
+        child: Card(
+          child: Padding(
+            padding: const EdgeInsets.all(8),
+            child: Column(
+              children: [
+                Text(
+                  'Price over the last 24 hours',
+                  style: TextStyle(
+                    fontWeight: FontWeight.normal
+                  )
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Expanded(
+                  child: new charts.LineChart(_getSeriesData(data), animate: true,)
+                )
+              ]
+            ))
+        )
+        );
     }
 
-    Card _card(double price) => Card(
-      child: ListTile(
-        leading: const Icon(Icons.flight_land),
-        title: Text(
-          "$price", 
-          style: TextStyle(
-            fontSize: 14,
-          )),
-        tileColor: Colors.green,
-      )
-    );
+
+    _getSeriesData(data) {
+      // return Container();
+      List<charts.Series<CurrencyHistory, int>> series = [
+        charts.Series(
+          id: "24 Price",
+          data: data,
+          domainFn: (CurrencyHistory series, _) =>  series.index,
+          measureFn: (CurrencyHistory series, _) => series.price,
+          colorFn: (CurrencyHistory series, _) => charts.MaterialPalette.blue.shadeDefault
+          )
+      ];
+      return series;
+    }
 }
 
 
