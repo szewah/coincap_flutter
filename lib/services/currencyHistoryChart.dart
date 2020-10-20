@@ -12,6 +12,8 @@ Future<List<CurrencyHistory>> fetchCurrencyHistory(coin, day) async {
 
     Response response = await get(apiHead+apiTail);
 
+    print('the api was called again');
+
     Map jsonResponse = json.decode(response.body);
 
     List coinResponse = jsonResponse['prices'];
@@ -22,6 +24,7 @@ Future<List<CurrencyHistory>> fetchCurrencyHistory(coin, day) async {
     for (var i = 1; i <coinResponse.length;i++) {
       double price = coinResponse[i][1];
       num index = i;
+      // var time = new DateTime.now();
       coinPriceMap = {'index': index, 'price': price};
       coinPriceList.add(coinPriceMap);
     }
@@ -38,7 +41,7 @@ Future<List<CurrencyHistory>> fetchCurrencyHistory(coin, day) async {
 
 class CurrencyHistory {
   
-  final num index;
+  final dynamic index;
   final double price;
 
   CurrencyHistory({
@@ -50,8 +53,9 @@ class CurrencyHistory {
   factory CurrencyHistory.fromJson(Map<String, dynamic> json) {
     // print(json);
     return CurrencyHistory(
-      index: json['index'] as num,
+      index: json['index'] as dynamic,
       price: json['price'] as double
     );
   }
+
 }

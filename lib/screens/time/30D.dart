@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:coincap_flutter/services/lineChart.dart';
+import 'package:coincap_flutter/services/currencyHistoryChart.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 
@@ -21,6 +21,11 @@ class _ThirtyDayState extends State<ThirtyDay> {
   @override
   void initState() {
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   @override
@@ -51,7 +56,7 @@ class _ThirtyDayState extends State<ThirtyDay> {
       );
     }
 
-    static const spinkit = SpinKitRipple(color: Colors.redAccent, size: 50);
+    static const spinkit = SpinKitRipple(color: Colors.orangeAccent, size: 50);
 
     Container _getContainer(data) {
       return Container(
@@ -83,11 +88,11 @@ class _ThirtyDayState extends State<ThirtyDay> {
 
     _getSeriesData(data) {
       // return Container();
-      List<charts.Series<CurrencyHistory, int>> series = [
+      List<charts.Series<CurrencyHistory, num>> series = [
         charts.Series(
           id: "Thirty Day Price",
           data: data,
-          domainFn: (CurrencyHistory series, _) =>  series.index,
+          domainFn: (CurrencyHistory series, _) =>  series.index / 24,
           measureFn: (CurrencyHistory series, _) => series.price,
           colorFn: (CurrencyHistory series, _) => charts.MaterialPalette.blue.shadeDefault
           )

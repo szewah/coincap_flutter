@@ -16,6 +16,7 @@ class CryptoDetail extends StatelessWidget {
       return Scaffold(
         extendBody: true,
         appBar: AppBar(
+          backgroundColor: Colors.orange[800],
           title: Text('Back'),
           ),
         body: Padding(
@@ -31,6 +32,7 @@ class CryptoDetail extends StatelessWidget {
                   style: TextStyle(
                       fontSize: 40,
                       fontWeight: FontWeight.w500,
+                      color: Colors.grey[800]
                       )
                 )
               ),
@@ -85,7 +87,7 @@ class CryptoDetail extends StatelessWidget {
                     children: [
                       TabBar(
                         labelColor: Colors.black12,
-                        indicatorColor: Colors.green,
+                        indicatorColor: Colors.orange[500],
                         tabs: [
                           Tab(text: '1D'),
                           Tab(text: '5D'),

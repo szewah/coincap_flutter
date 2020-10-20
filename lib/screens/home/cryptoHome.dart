@@ -20,14 +20,21 @@ class _CryptoHomeState extends State<CryptoHome> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    //hits the CMC api as soon as it loads
+    print('dispose function ran');
+  }
+
+  @override
   Widget build(BuildContext context) {
     
     print('build function ran');
     return Scaffold(
-      backgroundColor: Colors.blueGrey[100],
+      // backgroundColor: Colors.blueGrey[100],
       appBar: AppBar(
-        backgroundColor: Colors.blueGrey,
-        title: Text('Choose a coin'),
+        backgroundColor: Colors.orange[800],
+        title: Text('COIN WATCH'),
         centerTitle: true,
         elevation: 0,
       ),
@@ -72,6 +79,7 @@ class _CryptoHomeState extends State<CryptoHome> {
 
 
   Card _card(String id, String name, String symbol, String image, double price, double change_24hrPercent, double change_24hr, data, index) => Card(
+    elevation: 0,
     child: ListTile(
       leading: new Image.network('$image', height: 26, width: 26,),
       onTap: () {
