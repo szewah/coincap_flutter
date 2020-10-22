@@ -4,7 +4,6 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 
 
-
 class OneDay extends StatefulWidget {
   
   final String id;
