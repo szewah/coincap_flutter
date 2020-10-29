@@ -21,6 +21,7 @@ class _OneDayState extends State<OneDay> {
   @override
   void initState() {
     super.initState();
+    
   }
 
   @override
@@ -31,7 +32,6 @@ class _OneDayState extends State<OneDay> {
 
   @override
   Widget build(BuildContext context) {
-    print('this is working');
     return Scaffold(
       body: Container(
         height: 500,

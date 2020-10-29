@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
-import 'dart:async';
+// import 'dart:async';
 
 class CryptoHome extends StatefulWidget {
   @override
@@ -14,18 +14,17 @@ class CryptoHome extends StatefulWidget {
 
 class _CryptoHomeState extends State<CryptoHome> {
 
-  
-  // Timer timer;
 
-  // //clear cache
-  // Future<void> _deleteCacheContents() async {
+  //clear cache
+  // deleteCacheContents() async {
   //   final cacheDir = await getTemporaryDirectory();
+  //   print(cacheDir);
   //   if (await File(cacheDir.path + '/').exists()) {
   //     cacheDir.delete(recursive: true);
-  //     print("Deleted $cacheDir file!!");
+  //     print("Deleted $cacheDir file");
   //   }
   // }
-
+  
   @override
   void initState() {
     super.initState();
@@ -33,9 +32,17 @@ class _CryptoHomeState extends State<CryptoHome> {
     // timer = Timer.periodic(Duration(seconds: 15), (Timer t) => _deleteCacheContents());
     print('init state function ran');
   }
+  
+  // @override
+  // void dispose() {
+  //   super.dispose();
+  //   _deleteCacheContents();
+  //   print('this was disposed'); 
+  // }
 
   @override
   Widget build(BuildContext context) {
+    // deleteCacheContents(); 
     print('build function ran');
     return Scaffold(
       // backgroundColor: Colors.blueGrey[100],

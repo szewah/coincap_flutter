@@ -11,8 +11,9 @@ Future<List<CurrencyHistory>> fetchCurrencyHistory(coin, day) async {
 
     //declare a file name that has a json extension and get the cache directory
     String fileName = '$coin'+'$day'+'CacheData.json';
+    // print(fileName);
     var cacheDir = await getTemporaryDirectory();
-
+    
     //check whetehr the file exists. if so, load the contents
     if(await File(cacheDir.path + '/' + fileName).exists()) {
       print('loading $coin $day day cache');
@@ -20,7 +21,6 @@ Future<List<CurrencyHistory>> fetchCurrencyHistory(coin, day) async {
       var jsonData = File(cacheDir.path + "/" + fileName).readAsStringSync();
       //decode the data
       Map jsonResponse = json.decode(jsonData);
-      print(jsonResponse);
       //extract list from prices map
       List coinResponse = jsonResponse['prices'];
       //create a map to hold the individual prices and index

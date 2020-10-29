@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:coincap_flutter/screens/time/1D.dart';
 import 'package:coincap_flutter/screens/time/5D.dart';
 import 'package:coincap_flutter/screens/time/30D.dart';
-// import 'dart:io';
-// import 'package:path_provider/path_provider.dart';
+// import 'package:flutter/services.dart';
+import 'dart:io';
+import 'package:path_provider/path_provider.dart';
 
 class CryptoDetail extends StatelessWidget {
 
@@ -12,15 +13,28 @@ class CryptoDetail extends StatelessWidget {
 
   CryptoDetail({Key key, @required this.coin}): super(key:key);
 
-
+  //clear cache
+  Future<void> _deleteCacheContents() async {
+    final cacheDir = await getTemporaryDirectory();
+    if (cacheDir.existsSync()) {
+      cacheDir.deleteSync(recursive: true);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+
       return Scaffold(
         extendBody: true,
         appBar: AppBar(
           backgroundColor: Colors.orange[800],
-          title: Text('Back'),
+          leading: IconButton(icon:Icon(Icons.arrow_back),
+            onPressed:() {
+              print('i was pressed');
+              _deleteCacheContents();
+              Navigator.pop(context, true);
+              },
+            )
           ),
         body: Padding(
           padding: EdgeInsets.fromLTRB(1, 50, 0, 1),
