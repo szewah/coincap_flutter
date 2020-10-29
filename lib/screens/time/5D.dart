@@ -63,6 +63,7 @@ class _FiveDayState extends State<FiveDay> {
         height: 500,
         padding:EdgeInsets.all(10),
         child: Card(
+          elevation: 0,
           child: Padding(
             padding: const EdgeInsets.all(8),
             child: Column(

@@ -3,6 +3,7 @@ import 'package:coincap_flutter/screens/details/details.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
+
 class CryptoHome extends StatefulWidget {
   @override
   _CryptoHomeState createState() => _CryptoHomeState();
@@ -14,16 +15,8 @@ class _CryptoHomeState extends State<CryptoHome> {
   @override
   void initState() {
     super.initState();
-    //hits the CMC api as soon as it loads
     fetchCurrencies();
     print('init state function ran');
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    //hits the CMC api as soon as it loads
-    print('dispose function ran');
   }
 
   @override
@@ -83,6 +76,7 @@ class _CryptoHomeState extends State<CryptoHome> {
     child: ListTile(
       leading: new Image.network('$image', height: 26, width: 26,),
       onTap: () {
+        // _deleteCacheContents();
         Navigator.push(
           context, 
           MaterialPageRoute(builder: (context) => CryptoDetail(coin: data[index]))

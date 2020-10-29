@@ -10,33 +10,35 @@ Future<List<CurrencyHistory>> fetchCurrencyHistory(coin, day) async {
     String apiTail = "/market_chart?vs_currency=usd&days=$day";
 
     //declare a file name that has a json extension and get the cache directory
-    String fileName = 'CacheData.json';
+    String fileName = '$coin'+'$day'+'CacheData.json';
     var cacheDir = await getTemporaryDirectory();
 
     //check whetehr the file exists. if so, load the contents
     if(await File(cacheDir.path + '/' + fileName).exists()) {
-      print('loading cache');
+      print('loading $coin $day day cache');
       //call the file up and read the contents
       var jsonData = File(cacheDir.path + "/" + fileName).readAsStringSync();
       //decode the data
       Map jsonResponse = json.decode(jsonData);
+      print(jsonResponse);
       //extract list from prices map
       List coinResponse = jsonResponse['prices'];
       //create a map to hold the individual prices and index
       Map<String, dynamic> coinPriceMap = {};
       //create a List to hold the map
       List coinPriceList = [];
-
+      //iterate through response list create a list of maps with a key of index and a value of price
       for (var i = 1; i <coinResponse.length;i++) {
         double price = coinResponse[i][1];
         num index = i;
-        // var time = new DateTime.now();
         coinPriceMap = {'index': index, 'price': price};
         coinPriceList.add(coinPriceMap);
       }
 
       List<CurrencyHistory> list = coinPriceList.map((i) => CurrencyHistory.fromJson(i)).toList();
+
       return list;
+      // return null;
 
     }
     //if the json file doesn't exist, make the api call
@@ -60,7 +62,6 @@ Future<List<CurrencyHistory>> fetchCurrencyHistory(coin, day) async {
           for (var i = 1; i <coinResponse.length;i++) {
             double price = coinResponse[i][1];
             num index = i;
-            // var time = new DateTime.now();
             coinPriceMap = {'index': index, 'price': price};
             coinPriceList.add(coinPriceMap);
           }
@@ -73,6 +74,7 @@ Future<List<CurrencyHistory>> fetchCurrencyHistory(coin, day) async {
 
           List<CurrencyHistory> list = coinPriceList.map((i) => CurrencyHistory.fromJson(i)).toList();
           return list;
+          // return null;
           
         } catch(e) {
             print('This is the error which is causing the break $e');
@@ -94,7 +96,6 @@ class CurrencyHistory {
 
   // factory Currency.fromJson(Map<String, dynamic> json) 
   factory CurrencyHistory.fromJson(Map<String, dynamic> json) {
-    // print(json);
     return CurrencyHistory(
       index: json['index'] as dynamic,
       price: json['price'] as double

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:coincap_flutter/screens/time/1D.dart';
 import 'package:coincap_flutter/screens/time/5D.dart';
 import 'package:coincap_flutter/screens/time/30D.dart';
+import 'dart:io';
+import 'package:path_provider/path_provider.dart';
 
 class CryptoDetail extends StatelessWidget {
 
@@ -10,9 +12,31 @@ class CryptoDetail extends StatelessWidget {
 
   CryptoDetail({Key key, @required this.coin}): super(key:key);
 
+  //clear cache
+  Future<void> _deleteCacheContents() async {
+    final cacheDir = await getTemporaryDirectory();
+    var cache1 = '${coin.id}' + '1CacheData.json';
+    var cache5 ='${coin.id}' + '5CacheData.json';
+    var cache30 = '${coin.id}' + '30CacheData.json';
+    if (await File(cacheDir.path + '/' + cache1).exists()) {
+      cacheDir.delete(recursive: true);
+      print("Deleted $cacheDir file!!");
+    }
+    if (await File(cacheDir.path + '/' + cache5).exists()) {
+      cacheDir.delete(recursive: true);
+      print("Deleted $cacheDir file!!");
+    }
+    if (await File(cacheDir.path + '/' + cache30).exists()) {
+      cacheDir.delete(recursive: true);
+      print("Deleted $cacheDir file!!");
+    }
+  }
+
+
   @override
   Widget build(BuildContext context) {
-      print(coin.id);
+      _deleteCacheContents();
+      
       return Scaffold(
         extendBody: true,
         appBar: AppBar(

@@ -63,6 +63,7 @@ class _ThirtyDayState extends State<ThirtyDay> {
         height: 500,
         padding:EdgeInsets.all(10),
         child: Card(
+          elevation: 0,
           child: Padding(
             padding: const EdgeInsets.all(8),
             child: Column(
