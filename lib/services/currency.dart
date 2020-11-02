@@ -8,7 +8,7 @@ Future<List<Currency>> fetchCurrencies() async {
   try{
     
     // Response response = await get('http://10.0.2.2:3000/coin');
-    Response response = await get('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=8&page=1&sparkline=false');
+    Response response = await get('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false');
     
     var jsonResponse = json.decode(response.body);
     

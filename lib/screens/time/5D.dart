@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:coincap_flutter/services/lineChart.dart';
+import 'package:coincap_flutter/services/currencyHistoryChart.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 
@@ -24,8 +24,13 @@ class _FiveDayState extends State<FiveDay> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    print('this is working');
+    
     return Scaffold(
       body: Container(
         height: 500,
@@ -51,13 +56,14 @@ class _FiveDayState extends State<FiveDay> {
       );
     }
 
-    static const spinkit = SpinKitRipple(color: Colors.redAccent, size: 50);
+    static const spinkit = SpinKitRipple(color: Colors.orangeAccent, size: 50);
 
     Container _getContainer(data) {
       return Container(
         height: 500,
         padding:EdgeInsets.all(10),
         child: Card(
+          elevation: 0,
           child: Padding(
             padding: const EdgeInsets.all(8),
             child: Column(
@@ -83,11 +89,11 @@ class _FiveDayState extends State<FiveDay> {
 
     _getSeriesData(data) {
       // return Container();
-      List<charts.Series<CurrencyHistory, int>> series = [
+      List<charts.Series<CurrencyHistory, num>> series = [
         charts.Series(
           id: "Five Day Price",
           data: data,
-          domainFn: (CurrencyHistory series, _) =>  series.index,
+          domainFn: (CurrencyHistory series, _) =>  series.index / 24,
           measureFn: (CurrencyHistory series, _) => series.price,
           colorFn: (CurrencyHistory series, _) => charts.MaterialPalette.blue.shadeDefault
           )

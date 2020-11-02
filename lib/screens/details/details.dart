@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:coincap_flutter/screens/time/1D.dart';
 import 'package:coincap_flutter/screens/time/5D.dart';
 import 'package:coincap_flutter/screens/time/30D.dart';
+import 'package:path_provider/path_provider.dart';
 
 class CryptoDetail extends StatelessWidget {
 
@@ -10,13 +11,28 @@ class CryptoDetail extends StatelessWidget {
 
   CryptoDetail({Key key, @required this.coin}): super(key:key);
 
+  //clear cache
+  Future<void> _deleteCacheContents() async {
+    final cacheDir = await getTemporaryDirectory();
+    if (cacheDir.existsSync()) {
+      cacheDir.deleteSync(recursive: true);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-      print(coin.id);
+
       return Scaffold(
         extendBody: true,
         appBar: AppBar(
-          title: Text('Back'),
+          backgroundColor: Colors.orange[800],
+          leading: IconButton(icon:Icon(Icons.arrow_back),
+            onPressed:() {              
+              _deleteCacheContents();
+              print('cache deleted');
+              Navigator.pop(context, true);
+              },
+            )
           ),
         body: Padding(
           padding: EdgeInsets.fromLTRB(1, 50, 0, 1),
@@ -31,6 +47,7 @@ class CryptoDetail extends StatelessWidget {
                   style: TextStyle(
                       fontSize: 40,
                       fontWeight: FontWeight.w500,
+                      color: Colors.grey[800]
                       )
                 )
               ),
@@ -85,7 +102,7 @@ class CryptoDetail extends StatelessWidget {
                     children: [
                       TabBar(
                         labelColor: Colors.black12,
-                        indicatorColor: Colors.green,
+                        indicatorColor: Colors.orange[500],
                         tabs: [
                           Tab(text: '1D'),
                           Tab(text: '5D'),
