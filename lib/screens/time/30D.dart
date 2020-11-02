@@ -30,7 +30,7 @@ class _ThirtyDayState extends State<ThirtyDay> {
 
   @override
   Widget build(BuildContext context) {
-    print('this is working');
+    
     return Scaffold(
       body: Container(
         height: 500,

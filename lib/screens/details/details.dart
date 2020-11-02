@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:coincap_flutter/screens/time/1D.dart';
 import 'package:coincap_flutter/screens/time/5D.dart';
 import 'package:coincap_flutter/screens/time/30D.dart';
-// import 'package:flutter/services.dart';
-import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 
 class CryptoDetail extends StatelessWidget {
@@ -29,9 +27,9 @@ class CryptoDetail extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: Colors.orange[800],
           leading: IconButton(icon:Icon(Icons.arrow_back),
-            onPressed:() {
-              print('i was pressed');
+            onPressed:() {              
               _deleteCacheContents();
+              print('cache deleted');
               Navigator.pop(context, true);
               },
             )

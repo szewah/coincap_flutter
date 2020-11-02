@@ -27,6 +27,7 @@ Future<List<CurrencyHistory>> fetchCurrencyHistory(coin, day) async {
       Map<String, dynamic> coinPriceMap = {};
       //create a List to hold the map
       List coinPriceList = [];
+      print('still taking time to create');
       //iterate through response list create a list of maps with a key of index and a value of price
       for (var i = 1; i <coinResponse.length;i++) {
         double price = coinResponse[i][1];
@@ -34,7 +35,7 @@ Future<List<CurrencyHistory>> fetchCurrencyHistory(coin, day) async {
         coinPriceMap = {'index': index, 'price': price};
         coinPriceList.add(coinPriceMap);
       }
-
+      
       List<CurrencyHistory> list = coinPriceList.map((i) => CurrencyHistory.fromJson(i)).toList();
 
       return list;
@@ -70,7 +71,7 @@ Future<List<CurrencyHistory>> fetchCurrencyHistory(coin, day) async {
           var tempDir = await getTemporaryDirectory();
           File file = new File(tempDir.path + '/' + fileName);
           file.writeAsString(stringResponse, flush: true, mode: FileMode.write);
-
+          print('new cache created');
 
           List<CurrencyHistory> list = coinPriceList.map((i) => CurrencyHistory.fromJson(i)).toList();
           return list;

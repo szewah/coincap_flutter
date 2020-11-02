@@ -79,7 +79,10 @@ class _OneDayState extends State<OneDay> {
                   height: 20,
                 ),
                 Expanded(
-                  child: new charts.LineChart(_getSeriesData(data), animate: true,)
+                  child: new charts.LineChart(_getSeriesData(data),
+                   animate: true,
+                  //  defaultRenderer: new charts.LineRendererConfig(includePoints: true),
+                   )
                 )
               ]
             ))
@@ -91,7 +94,7 @@ class _OneDayState extends State<OneDay> {
 
     _getSeriesData(data) {
       // return Container();
-      print(data[0].index);
+
 
       List<charts.Series<CurrencyHistory, num>> series = [
         charts.Series(
